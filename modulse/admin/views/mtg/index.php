@@ -1,6 +1,6 @@
 <?php
 
-?>
+use yii\widgets\Menu; ?>
 <div class="admin-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>
@@ -11,7 +11,7 @@
     <p>
         <?php
         $menuItems[] =[ ['label' => 'ссылка 1', 'url' => ['#']], ['label' => 'ссылка 2', 'url' => ['#']]];
-        echo \yii\widgets\Menu::widget(
+        echo Menu::widget(
         [
                 'items' => [['label' => 'ссылка 1', 'url' => ['#']], ['label' => 'ссылка 2', 'url' => ['#']]],
             ]

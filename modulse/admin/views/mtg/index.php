@@ -10,8 +10,7 @@ use yii\widgets\Menu; ?>
     </p>
     <p>
         <?php
-        $menuItems[] =[ ['label' => 'ссылка 1', 'url' => ['#']], ['label' => 'ссылка 2', 'url' => ['#']]];
-        echo Menu::widget(
+         echo Menu::widget(
         [
                 'items' => [['label' => 'ссылка 1', 'url' => ['#']], ['label' => 'ссылка 2', 'url' => ['#']]],
             ]

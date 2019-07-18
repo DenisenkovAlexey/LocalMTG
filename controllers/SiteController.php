@@ -135,6 +135,10 @@ class SiteController extends Controller
             return $this->render('accessDenied');
         }
 
+    }
 
+    public function actionAccessDenied()
+    {
+        return $this->render('accessDenied');
     }
 }

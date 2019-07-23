@@ -19,7 +19,7 @@ class AdminPanelController extends Controller
         unset(Yii::$app->getView()->params['leftMenu']);
         Yii::$app->getView()->params['topMenu'] = [
             ['label' =>'MTG', 'url' => Url::toRoute('mtg/index')],
-            ['label' =>'Пользователи', 'url' => Url::toRoute('default/index')],
+            ['label' =>'Пользователи', 'url' => Url::toRoute('users/index')],
         ];
 
         if (!Yii::$app->user->can('canAdmin')) {

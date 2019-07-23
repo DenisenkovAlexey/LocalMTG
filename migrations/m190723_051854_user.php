@@ -32,11 +32,11 @@ class m190723_051854_user extends Migration
     public function up()
     {
             $this->createTable('user',[
-                'id' => Schema::TYPE_PK,
-                'username' => Schema::TYPE_STRING,
-                'hash' => Schema::TYPE_STRING,
-                'auth_key' => Schema::TYPE_STRING,
-                'token' =>Schema::TYPE_STRING,
+                'id' => $this->primaryKey(11),
+                'username' => $this->string(80)->unique(),
+                'hash' => $this->string(128),
+                'auth_key' => $this->string(32),
+                'token' =>$this->string(128),
             ]
             );
 
@@ -46,5 +46,6 @@ class m190723_051854_user extends Migration
     {
         echo "m190723_051854_user cannot be reverted.\n";
         $this->dropTable('user');
+
     }
 }

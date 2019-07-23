@@ -3,6 +3,8 @@
 namespace app\modulse\admin\controllers;
 
 
+use Yii;
+
 /**
  * Default controller for the `admin` module
  */
@@ -14,6 +16,7 @@ class DefaultController extends AdminPanelController
      */
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 

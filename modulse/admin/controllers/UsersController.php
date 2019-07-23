@@ -11,6 +11,6 @@ class UsersController extends AdminPanelController
     public function actionIndex()
     {
         $usr = User::find()->all();
-        return $this->render('index', ['$usr' => $usr]);
+        return $this->render('index',compact('usr'));
     }
 }

@@ -33,6 +33,7 @@ if (isset($this->params['topMenu'])) {
             ],
             ]
     );
+
     echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-left'],
             'items' => $this->params['topMenu'],

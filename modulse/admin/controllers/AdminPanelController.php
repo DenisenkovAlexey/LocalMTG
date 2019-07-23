@@ -5,8 +5,10 @@ namespace app\modulse\admin\controllers;
 
 
 
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
+
 
 class AdminPanelController extends Controller
 {
@@ -16,9 +18,8 @@ class AdminPanelController extends Controller
     {
         unset(Yii::$app->getView()->params['leftMenu']);
         Yii::$app->getView()->params['topMenu'] = [
-            ['label' =>'1 пункт меню', 'url' => ['#1']],
-            ['label' =>'2 пункт меню', 'url' => ['#2']],
-            ['label' =>'3 пункт меню', 'url' => ['#3']],
+            ['label' =>'MTG', 'url' => Url::toRoute('mtg/index')],
+            ['label' =>'Пользователи', 'url' => Url::toRoute('default/index')],
         ];
 
         if (!Yii::$app->user->can('canAdmin')) {

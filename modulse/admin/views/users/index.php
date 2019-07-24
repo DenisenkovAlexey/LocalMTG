@@ -1,16 +1,12 @@
 <?php
-echo 'Страница администрирования пользователей';
 
-var_dump($usr);
-/*echo \yii\grid\GridView::widget([
-         'dataProvider' => $usr,
+echo \yii\grid\GridView::widget([
+         'dataProvider' => $dataProvider,
          'columns' => [
              'id',
              'username',
-             'hash',
-             'auth_key',
-             'token',
+             ['class' => 'yii\grid\ActionColumn'],
         ]
      ]
 
- );*/
+ );

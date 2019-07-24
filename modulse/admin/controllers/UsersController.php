@@ -5,12 +5,19 @@ namespace app\modulse\admin\controllers;
 
 
 use app\models\User;
+use yii\data\ActiveDataProvider;
 
 class UsersController extends AdminPanelController
 {
     public function actionIndex()
     {
-        $usr = User::find()->all();
-        return $this->render('index',compact('usr'));
+        $dataProvider = new ActiveDataProvider([
+            'query' => User::find(),
+                'pagination' => [
+                    'pageSize' => 20,
+                    ],
+                ]
+        );
+        return $this->render('index',compact('dataProvider'));
     }
 }

@@ -5,6 +5,8 @@ echo \yii\grid\GridView::widget([
          'columns' => [
              'id',
              'username',
+             'role',
+             'permissions',
              ['class' => 'yii\grid\ActionColumn'],
         ]
      ]

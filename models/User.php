@@ -3,6 +3,7 @@
 namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\rbac\Permission;
 use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
@@ -11,6 +12,26 @@ class User extends ActiveRecord implements IdentityInterface
     private function getHash()
     {
         return $this->hash;
+    }
+
+    private function getRole()
+    {
+        $roles = Yii::$app->authManager->getRolesByUser($this->getId());
+        $temp = [];
+        foreach ($roles as $role) {
+            array_push($temp, $role->name);
+        }
+        return $temp;
+    }
+
+    private  function getPermissions()
+    {
+        $Permissions = Yii::$app->authManager->getPermissionsByUser($this->getId());
+        $temp = [];
+        foreach ($Permissions as $Permission) {
+            array_push($temp, $Permission->name);
+        }
+        return $temp;
     }
 
     /**
@@ -113,6 +134,20 @@ class User extends ActiveRecord implements IdentityInterface
 
         }
         return false;
+    }
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'role':
+                return implode(',',$this->getRole());
+                break;
+            case 'permissions':
+                return implode(',', $this->getPermissions());
+                break;
+            default: return parent::__get($name);
+        }
+
+
     }
 
 }

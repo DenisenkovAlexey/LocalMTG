@@ -5,6 +5,7 @@ namespace app\modulse\admin\controllers;
 
 
 use app\models\User;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 class UsersController extends AdminPanelController
@@ -19,5 +20,12 @@ class UsersController extends AdminPanelController
                 ]
         );
         return $this->render('index',compact('dataProvider'));
+    }
+
+    public function actionDelete($id)
+    {
+       User::findIdentity($id)->delete();
+       (Yii::$app->authManager)->revokeAll($id);
+       $this->redirect('index');
     }
 }

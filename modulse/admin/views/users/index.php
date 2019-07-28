@@ -7,7 +7,10 @@ echo \yii\grid\GridView::widget([
              'username',
              'role',
              'permissions',
-             ['class' => 'yii\grid\ActionColumn'],
+             [
+                 'class' => 'yii\grid\ActionColumn',
+                 'template' => '{update}&nbsp;&nbsp;&nbsp;{delete}',
+             ],
         ]
      ]
 

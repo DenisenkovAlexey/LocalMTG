@@ -3,7 +3,6 @@
 namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
-use yii\rbac\Permission;
 use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
@@ -77,6 +76,8 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->id;
     }
 
+
+
     /**
      * Returns a key that can be used to check the validity of a given identity ID.
      *
@@ -97,7 +98,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
 
-        $this->auth_key;
+        return $this->auth_key;
     }
 
 
@@ -146,8 +147,17 @@ class User extends ActiveRecord implements IdentityInterface
                 break;
             default: return parent::__get($name);
         }
-
-
     }
 
+    public function __set($name, $value)
+    {
+        switch ($name) {
+            case 'password':
+                $this->hash = YII::$app->security->generatePasswordHash($value);
+                break;
+            default:
+                parent::__set($name, $value);
+                break;
+        }
+    }
 }

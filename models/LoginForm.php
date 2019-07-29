@@ -44,7 +44,6 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        //TODO: валидация пароля
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 

@@ -2,13 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\RegistrationUserForm;
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -18,17 +18,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => array(
                 'class' => VerbFilter::className(),
                 'actions' => array(
@@ -61,6 +50,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest)
+        {
+            $this->redirect('/site/login');
+        }
         return $this->render('index');
     }
 
@@ -103,17 +96,26 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionContact()
+    public function actionTrade()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if (Yii::$app->user->isGuest)
+        {
+            $this->redirect('/site/login');
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        return $this->render('trade');
+    }
+
+    public function actionRegistration()
+    {
+
+        $model = new RegistrationUserForm();
+        if ($model->load(Yii::$app->request->post()) && $model->registration())
+        {
+            return $this->goBack();
+
+        } else {
+            return $this->render('registration', ['model' => $model]);
+        }
     }
 
     /**
@@ -121,24 +123,21 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionDeck()
     {
-        return $this->render('about');
-    }
-
-    public function actionAdmin()
-    {
-
-        if (Yii::$app->user->can('canAdmin')) {
-            return $this->render('admin');
-        } else {
-            return $this->render('accessDenied');
+        if (Yii::$app->user->isGuest)
+        {
+            $this->redirect('/site/login');
         }
-
+        return $this->render('deck');
     }
 
     public function actionAccessDenied()
     {
+        if (Yii::$app->user->isGuest)
+        {
+            $this->redirect('/site/login');
+        }
         return $this->render('accessDenied');
     }
 }

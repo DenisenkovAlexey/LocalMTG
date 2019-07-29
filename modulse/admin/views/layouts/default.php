@@ -26,8 +26,11 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div  class="wrap" >
 <?php
+
 if (isset($this->params['topMenu'])) {
     NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
         'options' => [
         'class' => 'navbar-inverse navbar-fixed-top',
             ],
@@ -35,7 +38,7 @@ if (isset($this->params['topMenu'])) {
     );
 
     echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-left'],
+            'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => $this->params['topMenu'],
         ]);
     NavBar::end();

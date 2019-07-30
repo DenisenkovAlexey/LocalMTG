@@ -16,7 +16,6 @@ class AdminPanelController extends Controller
 
     public function beforeAction($action)
     {
-        unset(Yii::$app->getView()->params['leftMenu']);
         Yii::$app->getView()->params['topMenu'] = [
             ['label' =>'MTG', 'url' => Url::toRoute('mtg/index')],
             ['label' =>'Пользователи', 'url' => Url::toRoute('users/index')],
